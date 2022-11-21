@@ -22,8 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home', views.index, name='home'),
     path('users/', include('app_users.urls')),
-    path('register', views.register, name='register'),
-    path('login', views.login, name='register'),
     path('booking',views.my_booking,name="mybooking"),
     path('city/list',views.CityList.as_view(),name="citylist"),
 ]

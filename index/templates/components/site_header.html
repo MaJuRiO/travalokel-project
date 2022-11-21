@@ -20,7 +20,9 @@
               <span>LOGOUT</span>
             </a>
             {% else %}
-              <button class="btn btn-outline-success me-md-2" type="button" id="btnRegister">register</button>
+            <a href="{% url 'register'%}" class="btn btn-outline-success" role="button" >
+              <span>Register</span>
+            </a>
               <a href="{% url 'login'%}" class="btn btn-outline-success" role="button" >
                 <span>LOGIN</span>
               </a>
