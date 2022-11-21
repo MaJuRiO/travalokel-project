@@ -7,7 +7,6 @@
     font-family: 'Roboto Slab', serif;
 }
 
-
 .bg{
     background-image: url(/static/img/bg-home.png); 
     background-size: cover;
@@ -52,7 +51,7 @@ ul {
     transition: all 0.2s ease-in;
   }
 
-  [id='btnHOME']:hover{
+[id='btnHOME']:hover{
     text-shadow:0px 0px 30px #ffffff;
     -moz-transition: all 0.2s ease-in;
     -o-transition: all 0.2s ease-in;
@@ -60,3 +59,4 @@ ul {
     transition: all 0.2s ease-in;
     size:110%;
   }
+
