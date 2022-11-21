@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/glyphicon.css' %}">
+    <script src="{% static 'js/travalokel.js' %}"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <title>Travarokel Home</title>
+</head>
+
+<body class="bg">
+    <nav class="navbar navbar-expand-lg bg-dark bg-gradient mx-auto " style="width: 1100px;">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white fs-2" id="btnHOME">Travarokel</a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li><a id="btnMybooking">การจองของฉัน            </a></li>
+              <li><a id="btnMymail">กล่องจดหมายของฉัน          </a></li>
+              <li><a id="btncontactus">ติดต่อเรา                </a></li>
+              <li><a id="btnHelpcenter">ศูนย์ช่วยเหลือ           </a></li>
+              <li><a id="btnHOW">วิธีการจอง                     </a></li>
+            </ul>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-outline-success me-md-2" type="button" id="btnRegister">register</button>
+            <button class="btn btn-outline-success" type="button">login</button>
+          </div>
+        </div>
+      </nav><br><br><br>
+      <div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1100px; height: 400px; ">
+        <span class="text-center d-block p-2 text-bg-primary">จองตั๋วเครื่่องบิน</span><br><br>
+        <form class="row g-3 needs-validation" novalidate>
+
+            <div class="form-floating col-md-4">
+                <select class="form-select" id="select_start" aria-label="Floating label select example">
+                  <option selected style="color:grey ;"></option>
+                    <option selected value="Select Airport">Select Airport</option>
+                    <option value="Bangkok">Bangkok</option>
+                    <option value="Chiang Mai">Chiang Mai</option>
+                  </select>
+                  <label for="floatingSelect">จาก</label>
+            </div>
+            <div class="form-floating col-md-4">
+                <select class="form-select" id="select_goal" aria-label="Floating label select example">
+                    <option selected value="Select destination">Select destination</option>
+                    <option value="Bangkok">Bangkok</option>
+                    <option value="Chiang Mai">Chiang Mai</option>
+                  </select>
+                  <label for="floatingSelect">ไป</label>
+            </div>
+            <div class="form-floating col-md-4">
+                <select class="form-select" id="seat" aria-label="Floating label select example">
+                    <option selected value="โปรดเลือกจำนวนผู้โดยสาร">โปรดเลือกจำนวนผู้โดยสาร</option>
+                    <option value="1">1 ท่าน</option>
+                    <option value="2">2 ท่าน</option>
+                    <option value="3">3 ท่าน</option>
+                  </select>
+                  <label for="floatingSelect">จำนวนผู้โดยสาร</label>
+            </div>
+            <div class='col col-lg-4 col-md-8 col-12 col-auto'>
+                <div class='input-group mb-2' style="height:50px ;">
+                    <input type='text' id='txt_flightDate' name='date' class='form-control' placeholder='Date' required>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="form-floating col-md-4">
+                <select class="form-select" id="seatclass" aria-label="Floating label select example">
+                    <option selected value="seatclass">เลือกประเภทเที่ยวบิน</option>
+                    <option value="First">First Class!!</option>
+                    <option value="business">business Class!</option>
+                    <option value="Economy">Economy Class....</option>
+                  </select>
+                  <label for="floatingSelect">ชั้นโดยสาร</label>
+        
+            </div>
+            <div class="col-12"></div>
+            <div class="d-flex flex-row-reverse">
+              <button class="btn btn-warning" type="button" id="btnfindflight">ค้นหาเที่ยวบิน</button>
+            </div>
+          </form>
+      </div>
+</body>
+</html>
