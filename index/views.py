@@ -19,9 +19,6 @@ from django.db import connection
 def index(request):
     return render(request, 'index.html')
 
-def register(request):
-    return render(request, 'register.html')
-
 def search(request):
     city = City.objects.all()
     min_date = f"{datetime.now().date().year}-{datetime.now().date().month}-{datetime.now().date().day}"
@@ -85,71 +82,6 @@ def flightView(request):
 #---------------view flight page ------------------
 def viewFlight(request):
     return render(request, 'view.html')
-
-#------------register and login form------------------
-def registerForm(request):
-    return render(request, 'register.html')
-
-
-def loginForm(request):
-    return render(request, 'loginform.html')
-
-# --------------Add new user (from register page) to database--------------------------
-
-def addUser(request):
-    Firstname = request.POST['Firstname']
-    Lastname = request.POST['Lastname']
-    email = request.POST['email']
-    username = request.POST['username']
-    password = request.POST['password']
-    repassword = request.POST['repassword']
-    #phonenumber = request.POST['phonenumber']
-
-    if password == repassword:
-        if User.objects.filter(username=username).exists():
-            messages.info(request, "This Username is already used.")
-            return redirect('/register')
-        elif User.objects.filter(email=email).exists():
-            messages.info(request, "This email is already used.")
-            return redirect('/register')
-
-        else:
-            user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password,
-            first_name=Firstname,
-            last_name=Lastname,
-            #phone_no=phonenumber
-            )
-            user.save()
-            return redirect('/login')
-    else:
-        messages.info(request, "Password doesn't match.")
-        return redirect('/register')
-
-#---------------authenticate user and login--------------------
-
-def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            return redirect('/')
-        else:
-            messages.error(request, "Incorrect Username or Password")
-            return redirect('/loginform')
-    else:
-        return render(request, 'loginform.html')
-
-#--------------Logout----------------------------
-
-def logout(request):
-    auth.logout(request)
-    return redirect('/')
-
 
 # --------------------Get details from view page (when you choose any flight)-------------------------------
 
