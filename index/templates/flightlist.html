@@ -1,0 +1,41 @@
+{% extends 'components/site_base.html' %}
+
+{% block title %}Flight list{% endblock %}
+
+{% block content %}
+
+<body class="bg">
+  {% include 'components/site_header.html' %}
+  <div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1100px; ">
+    <div id="info-flight">
+      {% for lineitem in flights %}
+      <div class="row justify-content-space-between p-1 rounded" style="border:1px solid gold;">
+        <div class="col-3">   {{ lineitem.airline }}            </div>
+        <div class="col-2" align="center">   <p class="fs-6">{{ lineitem.departure_time }}</p><p class="fs-6">{{ paths.departure }}</p></div>
+        <div class="col-2" align="center">   
+          {{ lineitem.duration }} 
+          <span class="dot">
+          </span><hr class="timeline" style="border:1px solid black ;">
+          <span class="dot"></span></div>
+        <div class="col-2" align="center">   <p class="fs-6">{{ lineitem.arrival_time }}</p><p class="fs-6">{{ paths.destination }}</p></div>
+        <div class="col-3" align="right"> <button type="button" class="btn btn-primary">เลือก</button></div>  
+          <div><br><br>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flightinfo{{ forloop.counter }}" aria-expanded="false" aria-controls="collapseExample">รายละเอียดเที่ยวบิน</button>
+            
+          </div></div>
+            <div class="collapse" id="flightinfo{{ forloop.counter }}">
+              <div class="card card-body">
+                <div class="col">  {{ lineitem.departure_time }}  {{ paths.departure }}  </div>
+                <div class="col">  {{ lineitem.arrival_date }}    {{ paths.destination }}  </div>
+                <div class="col">  {{ lineitem.duration }}          </div>
+                <div class="col">  {{ lineitem.arrival_time }}      </div>
+                <div class="col">  {{ lineitem.departure_date }}    </div>
+                <div class="col">  {{ lineitem.cities.city_name }}  </div>
+              </div>
+            </div><br>
+        
+      {% endfor %}
+    </div>
+  </div>
+</body>
+{% endblock %}

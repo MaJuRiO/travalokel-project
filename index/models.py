@@ -38,11 +38,20 @@ class City_B(models.Model):
     def __str__(self):
         return self.city_name
 
+class Path(models.Model):
+    path_id = models.CharField(max_length=5,primary_key=True)
+    departure = models.CharField(max_length=5)
+    destination = models.CharField(max_length=5)
+    class Meta:
+        db_table = "path"
+        managed = False
+    def __str__(self):
+        return str(self.path_id)
 
 class Flight(models.Model):
     flight_id = models.CharField(max_length=5,primary_key=True)
     airline = models.CharField(max_length=100)
-    path_id = models.CharField(max_length=5)
+    path_id = models.ForeignKey(Path,on_delete=models.CASCADE, db_column='path_id')
     departure_time = models.TimeField()
     arrival_time = models.TimeField()
     duration = models.TimeField()
@@ -77,16 +86,6 @@ class Passenger(models.Model):
         managed = False
     def __str__(self):
         return f"Passenger: {self.first_name} {self.last_name} {self.email}"
-
-class Path(models.Model):
-    path_id = models.CharField(max_length=5,primary_key=True)
-    departure = models.CharField(max_length=5)
-    destination = models.CharField(max_length=5)
-    class Meta:
-        db_table = "path"
-        managed = False
-    def __str__(self):
-        return str(self.path_id)
 
 class Payment(models.Model):
     card_no = models.CharField(max_length=20,primary_key=True)

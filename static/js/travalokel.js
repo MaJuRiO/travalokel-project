@@ -68,6 +68,7 @@ $(document).ready( function () {
             $('#txt_seatclass').focus();
             return false;
             }
+        window.open('/flight/list/' + $('#select_start').find(':selected').attr('value') + $('#select_goal').find(':selected').attr('value') );
     });
 
     $('#btnMybooking').click(function () {

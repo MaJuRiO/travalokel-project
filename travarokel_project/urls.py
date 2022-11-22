@@ -26,4 +26,6 @@ urlpatterns = [
     path('search',views.search,name="search"),
     path('booking',views.my_booking,name="mybooking"),
     path('city/list',views.CityList.as_view(),name="citylist"),
+    path('searchflight',views.search,name="search"),
+    path('flight/list/<str:start>/<str:goal>',views.FlightList.as_view(),name="FlightList"),
 ]

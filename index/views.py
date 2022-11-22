@@ -39,7 +39,7 @@ def search(request):
         })
 
     else:
-        return render(request, "search.html", {
+        return render(request, "searchflight.html", {
             'min_date': min_date,
             'max_date': max_date,
             'city': city
@@ -166,7 +166,6 @@ def confirm(request):
             return HttpResponse(e)
     else:
         return HttpResponse("Method must be post.")
-
 
 #--------------------create E-ticket, ticket in my booking page and save to database----------------------------------------------------
 
@@ -313,15 +312,12 @@ class PathDetail(View):
 
         return JsonResponse(data)
 
-
 class ClassList(View):
     def get(self, request):
         seat_classes = list(FlightClass.objects.all().values())
         data = dict()
         data['seat_classes'] = seat_classes
-        response = JsonResponse(data)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
+        return JsonResponse(data)
 
 class ClassDetail(View):
     def get(self, request, pk):
@@ -333,12 +329,19 @@ class ClassDetail(View):
 # -----------------------------------------------------------      
 
 class FlightList(View):
-    def get(self, request):
-        flights = list(Flight.objects.order_by('flight_id').all().values())
+    def get(self, request, start ,goal):
+        paths = list(Path.objects.filter(departure=start,destination=goal).values())
+        #print(Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"])
+        cities = list(City.objects.filter(city_id=start).values())
+        cities2 = list(City.objects.filter(city_id=goal).values())
+        flights = list(Flight.objects.filter(path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"]).values())
+        
         data = dict()
+        data['paths'] = paths[0]
         data['flights'] = flights
-
-        return JsonResponse(data)
+        data['cities'] = cities
+        data['cities2'] = cities2
+        return render(request, 'flightlist.html', data)##JsonResponse(data)
 
 class FlightDetail(View):
     def get(self, request, id):
@@ -361,7 +364,6 @@ def reFormatDateYYYYMMDD(yyyymmdd):
     if (yyyymmdd == ''):
             return ''
     return yyyymmdd[6:10] + "-" + yyyymmdd[3:5] + "-" + yyyymmdd[:2]
-
 
 def reFormatNumber(str):
         if (str == ''):
