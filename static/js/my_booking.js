@@ -45,19 +45,3 @@ $(document).ready( function () {
     /* Start from */
     reset_form ();
 });
-
-$(document).ready( function () {
-    
-    $('#btnHOME').click(function () {
-        window.open('/home',"_self");
-    });
-
-    $('#btnRegister').click(function () {
-        window.open('/register');
-    });
-
-    $('#btnMybooking').click(function () {
-        window.open('/booking',"_self");
-
-    });
-});

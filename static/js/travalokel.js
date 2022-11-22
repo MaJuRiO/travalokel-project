@@ -51,6 +51,16 @@ $(document).ready( function () {
             $('#txt_seat').focus();
             return false;
             }
+        var flightDate = $('#txt_flightDate').val().trim();      
+        if (flightDate=='') {
+            alert('กรุณาระบุวันที่');
+            $('#txt_flightDate').focus();
+            return false;
+        }
+        if (!dateRegex.test(flightDate)){
+            alert('กรุณาระบุวันที่ ให้ถูกต้อง');
+            $('#txt_flightDate').focus();
+            return false;}
         var seatclass = $('#seatclass').find(':selected').attr('value')      
         if (seatclass == 'seatclass') 
             {
@@ -58,12 +68,6 @@ $(document).ready( function () {
             $('#txt_seatclass').focus();
             return false;
             }
-    });
-
-
-    
-    $('#btnHOME').click(function () {
-        window.open('/home',"_self");
     });
 
     $('#btnMybooking').click(function () {
@@ -75,16 +79,4 @@ $(document).ready( function () {
             $('#txt_CustomerCode').val('city_name');}
 
     })
-
-
-
 });
-
-
-
-
-function getSelectedDataAttribute(event) {
-    var selected_text = event.options[event.selectedIndex].innerHTML;
-    var selected_value = event.value;
-    var data_id = event.options[event.selectedIndex].dataset.id;    
-}
