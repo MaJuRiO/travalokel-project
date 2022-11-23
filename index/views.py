@@ -339,8 +339,9 @@ class FlightList(View):
         data = dict()
         data['paths'] = paths[0]
         data['flights'] = flights
-        data['cities'] = cities
-        data['cities2'] = cities2
+        data['cities'] = cities[0]
+        data['cities2'] = cities2[0]
+        print(data['cities2'])
         return render(request, 'flightlist.html', data)##JsonResponse(data)
 
 class FlightDetail(View):

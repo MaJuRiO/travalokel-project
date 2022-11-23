@@ -24,51 +24,42 @@ $(document).ready( function () {
 
 
     $('#btnfindflight').click(function () {
-        var start = $('#select_start').find(':selected').attr('value')      
+        var start = $('#select_start').find(':selected').attr('value');
         if (start == 'Select Airport') 
             {
             alert('กรุณาระบุ สนามบินที่ต้องการขึ้นเครื่อง ');
-            $('#txt_start').focus();
             return false;
             }
 
-        var goal = $('#select_goal').find(':selected').attr('value')   
+        var goal = $('#select_goal').find(':selected').attr('value');
         if (goal == 'Select destination')
             {
             alert('กรุณาระบุ สนามบินที่ต้องการลงเครื่อง ');
-            $('#txt_goal').focus();
             return false;
             }
-        if (goal == start)
-            {
-                alert('กรุณาระบุสถานที่บินใหม่อีกครั้ง')
-                return false;
+        if (goal == start){
+            alert('กรุณาระบุสถานที่บินใหม่อีกครั้ง');
+            return false;
             }
         var seat = $('#seat').find(':selected').attr('value')        
-        if (seat == 'seat') 
-            {                          
+        if (seat == '')            {                          
             alert('โปรดเลือกจำนวนผู้โดยสาร');
-            $('#txt_seat').focus();
             return false;
             }
-        var flightDate = $('#txt_flightDate').val().trim();      
+        var flightDate = $('#txt_flightDate').val().trim();
         if (flightDate=='') {
             alert('กรุณาระบุวันที่');
-            $('#txt_flightDate').focus();
             return false;
         }
-        if (!dateRegex.test(flightDate)){
-            alert('กรุณาระบุวันที่ ให้ถูกต้อง');
-            $('#txt_flightDate').focus();
-            return false;}
-        var seatclass = $('#seatclass').find(':selected').attr('value')      
-        if (seatclass == 'seatclass') 
-            {
+        alert($('#FlightType').find(':selected').attr('value'));
+        var seatclass = $('#FlightType').find(':selected').attr('value');
+        if (seatclass == ''){
             alert('โปรดเลือกประเภทที่นั่ง');
-            $('#txt_seatclass').focus();
             return false;
             }
-        window.open('/flight/list/' + $('#select_start').find(':selected').attr('value') + $('#select_goal').find(':selected').attr('value') );
+            
+            window.open('/flight/list/' + start +'/'+ goal);
+        
     });
 
     $('#btnMybooking').click(function () {

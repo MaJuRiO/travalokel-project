@@ -51,10 +51,28 @@ ul {
     size:110%;
 }
 
-[class='dot'] {
-    height: 25px;
-    width: 25px;
-    background-color: #bbb;
+.vl {
+    border-left: 2px solid;
+    border-image: linear-gradient(180deg, rgb(14, 14, 218), rgba(0,212,255,1)) 1;
+    height: 165px;
+}
+.dot1 {
+    height: 5px;
+    width: 5px;
+    background-color: rgb(14, 14, 218);
     border-radius: 50%;
     display: inline-block;
+    position: absolute;
+    top:12px;
+    left:191px;
+}
+.dot2 {
+    height: 5px;
+    width: 5px;
+    background-color: rgba(0,212,255,1);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 180px;
+    left:191px;
 }
