@@ -1,0 +1,71 @@
+{% extends 'components/site_base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<body style="background-color:#BCE6FF;">
+    <form>
+    {% include 'components/site_header.html' %}
+    <br>
+    <div class="row">
+        <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+            <h3>การจองของคุณ</h3><br>
+            <h6>กรอกข้อมูลและตรวจสอบการจอง</h6>
+            <div class="card" style="width:550px;height:123px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2"><span id="boot-icon" class="bi bi-people-fill" style="font-size: 57px; color: rgb(66, 133, 244);"></span></div>
+                            <div class="col-10">
+                                <div class="row">เข้าสู่ระบบ หรือ สมัครสมาชิก เพื่อรับสิทธิพิเศษสำหรับสมาชิกเท่านั้น</div>
+                                <div class="row">จองได้สะดวกและรวดเร็วขึ้นด้วยฟีเจอร์ Passenger Quick Pick</div>
+                                <div class="row" style="color:rgb(66, 133, 244);font-weight: bold;" align="left">เข้าสู่ระบบ หรือ สมัครสมาชิก</div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <h3>รายละเอียดการติดต่อ</h3>
+            <div class="card" style="width: 550px;height: 250px;">
+                <div class="card-header">ข้อมูลติดต่อ (สำหรับส่งตั๋ว/ใบจอง)</div>
+                <div class="card-body">
+                    <div class="form-field">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="First_name" class="form-label">ชื่อจริงและชื่อกลาง</label>
+                                <input type="text" class="form-control" id="First_name" aria-label="First name">
+                            </div>
+                            <div class="col-6">
+                                <label for="Last_name" class="form-label">นามสกุล</label>
+                                <input type="text" class="form-control" id="Last_name" aria-label="Last name">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="phonenumber" class="form-label">หมายเลขโทรศัพท์มือถือ</label>
+                                <input type="number" class="form-control" id="phonenumber" aria-label="First name">
+                            </div>
+                            <div class="col-6">
+                                <label for="email" class="form-label">อีเมล์</label>
+                                <input type="email" class="form-control" id="email" aria-label="Last name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5"><br><br><br><br>
+                <div class="card" style="width:330px;height:300px;">
+                <h5 class="card-header" id="card-header">{{ paths.departure }}<i class="bi bi-arrow-right"></i> {{ paths.destination }}</h5>
+                <div class="card-body">
+                    <p>ขาไป</p>
+
+                </div>
+            </div><br><br>
+            <button type="submit" class="btn btn-primary">ดำเนินการต่อ</button>
+        </div>
+    </div>
+</form>
+</body>
+{% endblock %}

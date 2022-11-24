@@ -1,74 +1,53 @@
-$(document).ready( function () {
-    $("#txt_flightDate").datepicker({ 
-        dateFormat: 'dd/mm/yy' 
+$(document).ready(function () {
+    $("#txt_flightDate").datepicker({
+        dateFormat: "dd/mm/yy",
     });
-    $('#btn_flightDate').click(function() {
-        $('#txt_flightDate').datepicker('show');
+    $("#btn_flightDate").click(function () {
+        $("#txt_flightDate").datepicker("show");
     });
 
-    /*$('#txt_start').click(function () {
-        $.ajax({
-            url:  '/city/list',
-            type:  'get',
-            dataType:  'json',
-            success: function  (data) {
-                let rows='<option selected>Open this select menu</option>'
-                data.cities.forEach(city => { 
-                rows += `
-                    <option>${city.city_name}</option>`;})
-                $('#txt_start').html(rows)
-            }   
-        })
-    })*/
-
-
-
-    $('#btnfindflight').click(function () {
-        var start = $('#select_start').find(':selected').attr('value');
-        if (start == 'Select Airport') 
-            {
-            alert('กรุณาระบุ สนามบินที่ต้องการขึ้นเครื่อง ');
-            return false;
-            }
-
-        var goal = $('#select_goal').find(':selected').attr('value');
-        if (goal == 'Select destination')
-            {
-            alert('กรุณาระบุ สนามบินที่ต้องการลงเครื่อง ');
-            return false;
-            }
-        if (goal == start){
-            alert('กรุณาระบุสถานที่บินใหม่อีกครั้ง');
-            return false;
-            }
-        var seat = $('#seat').find(':selected').attr('value')        
-        if (seat == '')            {                          
-            alert('โปรดเลือกจำนวนผู้โดยสาร');
-            return false;
-            }
-        var flightDate = $('#txt_flightDate').val().trim();
-        if (flightDate=='') {
-            alert('กรุณาระบุวันที่');
+    $("#btnfindflight").click(function () {
+        var start = $("#select_start").find(":selected").attr("value");
+        if (start == "Select Airport") {
+            alert("กรุณาระบุ สนามบินที่ต้องการขึ้นเครื่อง ");
             return false;
         }
-        alert($('#FlightType').find(':selected').attr('value'));
-        var seatclass = $('#FlightType').find(':selected').attr('value');
-        if (seatclass == ''){
-            alert('โปรดเลือกประเภทที่นั่ง');
+
+        var goal = $("#select_goal").find(":selected").attr("value");
+        if (goal == "Select destination") {
+            alert("กรุณาระบุ สนามบินที่ต้องการลงเครื่อง ");
             return false;
+        }
+        if (goal == start) {
+            alert("กรุณาระบุสถานที่บินใหม่อีกครั้ง");
+            return false;
+        }
+        var flightDate = $("#txt_flightDate").val().trim();
+        var flightDate = flightDate.slice(0, 10).split("/").reverse().join("-");
+        if (flightDate == "") {
+            alert("กรุณาระบุวันที่");
+            return false;
+        }
+        var seatclass = $("#FlightType").find(":selected").attr("value");
+        if (seatclass == "") {
+            alert("โปรดเลือกประเภทที่นั่ง");
+            return false;
+        }
+        const Url = start + "/" + goal + "/" + flightDate + "/" + seatclass;
+        window.open("/flight/list/" + Url);
+        $.ajax({
+            url: "/flight/list/" + start +"/" +goal +"/" + flightDate + "/" + seatclass,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                alert('hi')
+                
+            },
+            error: function(error){
+                console.log('Error ${error}')
             }
-            
-            window.open('/flight/list/' + start +'/'+ goal);
-        
+        });
     });
-
-    $('#btnMybooking').click(function () {
-        window.open('/booking',"_self");
-    });
-
-    $('body').on('click', 'a.a_click', function() {
-        if($('#txt_start').val() == 'city_name') {
-            $('#txt_CustomerCode').val('city_name');}
-
-    })
 });
+
+function get_flight_detail(flight_id) { }

@@ -20,6 +20,7 @@ from django.http import HttpResponseRedirect
 def index(request):
     return render(request, 'index.html')
 
+
 def search(request):
     city = City.objects.all()
     min_date = f"{datetime.now().date().year}-{datetime.now().date().month}-{datetime.now().date().day}"
@@ -27,8 +28,7 @@ def search(request):
     if request.method == 'POST':
         departure = request.POST.get('departure')
         destination = request.POST.get('destination')
-        departure_date = reFormatDateMMDDYYYY(
-            request.POST.get('departure_date'))
+        departure_date = reFormatDateMMDDYYYY(request.POST.get('departure_date'))
         seat_class = request.POST.get('seat_class')
         return render(request, 'search.html', {
             'departure': departure,
@@ -86,23 +86,11 @@ def viewFlight(request):
 
 # --------------------Get details from view page (when you choose any flight)-------------------------------
 
-def booking(request,fid,path,date,seat_class):
-
-    booking_detail = Flight.objects.select_related("flight_id","path_id").get(flight_id=fid,departure_date=date, 
-                                                    flight_id__seat_class=seat_class,path_id=path)
-    duration = booking_detail.duration
-    path_id = Path.objects.filter(path_id=path)
-    depart_detail = City_A.objects.filter(city_id=path_id[0].departure)
-    desti_detail = City_B.objects.filter(city_id=path_id[0].destination)
-    date = reFormatDateMMDDYYYY(date)
-    return render(request,'booking.html',{
-        'booking_detail' : booking_detail,
-        'departure_date' : date,
-        'departure' : depart_detail,
-        'destination' : desti_detail,
-        'duration' : duration
-        })
-
+def booking(request):
+    if request.method=='GET':
+        departure = request.GET.get('departure')
+        destination = request.GET.get('destination')
+    return render(request,'booking.html')
 
 #--------------Add passenger (fill in booking page) after press proceed to payment button---------------
 
@@ -201,14 +189,6 @@ def createticket(flight_id,departure_date,seat_class,total_amount,username):
 
     return ticket
 
-#---------------my booking page ---------------
-def my_booking(request):
-    tickets = Ticket.objects.filter(username=request.user.username).order_by('ticket_id').values('ticket_id','flight_id','departure_date',
-                                                                                            'seat_class','total_amount','booking_date','status')
-    return render(request, 'my_booking.html', {
-        'tickets': tickets,
-    })
-
 #----------------------resume pay booking (link to payment's path )--------------------
 
 def resume_booking(request):
@@ -229,34 +209,6 @@ def resume_booking(request):
         return HttpResponse("Method must be post.")
 
 #------------Cancle ticket and update status of ticket --------------------
-
-@csrf_exempt
-def cancel_ticket(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            ticket_id = request.POST['ticket_id']
-            try:
-                ticket = Ticket.objects.get(ticket_id=ticket_id)
-                if ticket.username == request.user.username:
-                    ticket.status = 'cancelled'
-                    ticket.save()
-                    return JsonResponse({'success': True})
-                    # return redirect('/my_booking')
-                else:
-                    return JsonResponse({
-                        'success': False,
-                        'error': "User unauthorised"
-                    })
-            except Exception as excep:
-                return JsonResponse({
-                    'success': False,
-                    'error': excep
-                })
-        else:
-            return HttpResponse("User unauthorised")
-    else:
-        return HttpResponse("Method must be POST.")
-
 
 # -----------------this part is used for ticket details ------------------------------------------------
 
@@ -329,20 +281,36 @@ class ClassDetail(View):
 # -----------------------------------------------------------      
 
 class FlightList(View):
-    def get(self, request, start ,goal):
+    def get(self, request, start, goal, date, seat_type):
         paths = list(Path.objects.filter(departure=start,destination=goal).values())
-        #print(Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"])
         cities = list(City.objects.filter(city_id=start).values())
         cities2 = list(City.objects.filter(city_id=goal).values())
-        flights = list(Flight.objects.filter(path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"]).values())
-        
+        flights = list(Flight.objects.filter(
+            path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"],departure_date=date).values())
+        #flight_class = list(FlightClass.objects.filter(flight_id=Flight.objects.fliter(flight_id=)))
         data = dict()
         data['paths'] = paths[0]
         data['flights'] = flights
         data['cities'] = cities[0]
         data['cities2'] = cities2[0]
-        print(data['cities2'])
-        return render(request, 'flightlist.html', data)##JsonResponse(data)
+        data['seatclass'] = seat_type
+        return JsonResponse(data)
+        
+class bookingflight(View):
+    def get(self,request,start, goal, date, seat_type):
+        paths = list(Path.objects.filter(departure=start,destination=goal).values())
+        cities = list(City.objects.filter(city_id=start).values())
+        cities2 = list(City.objects.filter(city_id=goal).values())
+        flights = list(Flight.objects.filter(
+            path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"],departure_date=date).values())
+        data = dict()
+        data['paths'] = paths[0]
+        data['flights'] = flights
+        data['cities'] = cities[0]
+        data['cities2'] = cities2[0]
+        data['flights'] = seat_type
+        return render(request, 'ticket_info.html', data)
+
 
 class FlightDetail(View):
     def get(self, request, id):
@@ -359,7 +327,7 @@ class FlightDetail(View):
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):
             return ''
-        return ddmmyyyy[8:10] + "/" + ddmmyyyy[5:7] + "/" + ddmmyyyy[:4]
+        return ddmmyyyy[8:10] + "-" + ddmmyyyy[5:7] + "-" + ddmmyyyy[:4]
 
 def reFormatDateYYYYMMDD(yyyymmdd):
     if (yyyymmdd == ''):

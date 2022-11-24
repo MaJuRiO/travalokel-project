@@ -17,27 +17,6 @@ class City(models.Model):
     def __str__(self):
         return self.city_name
 
-class City_A(models.Model):
-    city_id = models.CharField(max_length=5,primary_key=True)
-    city_name = models.CharField(max_length=50)
-    airport = models.TextField()
-    class Meta:
-        db_table = "city"
-        managed = False
-    def __str__(self):
-        return self.city_name
-
-#Destination
-class City_B(models.Model):
-    city_id = models.CharField(max_length=5,primary_key=True)
-    city_name = models.CharField(max_length=50)
-    airport = models.TextField()
-    class Meta:
-        db_table = "city"
-        managed = False
-    def __str__(self):
-        return self.city_name
-
 class Path(models.Model):
     path_id = models.CharField(max_length=5,primary_key=True)
     departure = models.CharField(max_length=5)
@@ -112,15 +91,3 @@ class Ticket(models.Model):
         managed = False
     def __str__(self):
         return str(self.ticket_id)
-
-class User(models.Model):
-    username = models.CharField(max_length=100,primary_key=True)
-    email = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    class Meta:
-        db_table = "user"
-        managed = False
-    def __str__(self):
-        return str(self.username)
