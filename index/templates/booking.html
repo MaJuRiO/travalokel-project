@@ -1,0 +1,61 @@
+{% extends 'components/site_base.html' %}
+
+{% block title %}Flight list{% endblock %}
+
+{% block content %}
+
+<body class="bg">
+  {% include 'components/site_header.html' %}
+  <p>{{ destination }}</p>
+  <form action="payment" onsubmit="return book_submit()" method="post"></form>>    
+  <div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1100px; ">
+    {% for lineitem in flights %}
+    <div id="info-flight-{{ forloop.counter }}"></div>
+    <div class="row justify-content-space-between p-1 rounded" style="border:1px solid gold;">
+      <div class="col-3"> {{ lineitem.airline }}</div>
+      <div class="col-2" align="center">
+        <p class="fs-6">{{ lineitem.departure_time }}</p>
+        <p class="fs-6">{{ paths.departure }}</p>
+      </div>
+      <div class="col-2" align="center">
+        {{ lineitem.duration }} <br>
+        <span id="boot-icon" class="bi bi-three-dots" style="font-size:2rem;"></span>
+      </div>
+      <div class="col-2" align="center">
+        <p class="fs-6">{{ lineitem.arrival_time }}</p>
+        <p class="fs-6">{{ paths.destination }}</p>
+      </div>
+      <div class="col-3" align="right"> <button type="button" class="btn btn-primary" id="selectflight">เลือก</button>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flightinfo{{ forloop.counter }}" aria-expanded="false"
+          aria-controls="collapseExample">รายละเอียดเที่ยวบิน</button>
+        <div class="visible" id="data-invi">
+          <span id="departure">{{cities.city_id}}</span>
+          <span id="goal">{{cities2.city_id}}</span>
+          <span id="flightDate">{{lineitem.departure_date}}</span>
+          <span id="seatclass">{{seatclass}}</span>
+          <span id="link-book">{{cities.city_id}}/{{cities2.city_id}}/{{lineitem.departure_date}}/{{seatclass}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="collapse" id="flightinfo{{ forloop.counter }}">
+      <div class="card card-body">
+        <div class="row">
+          <div class="col-2"> {{ lineitem.departure_time }}<br>{{ lineitem.departure_date }}<br><br><i
+              class="bi bi-airplane"></i>{{ lineitem.duration }}<br><br>{{ lineitem.arrival_time }}<br>{{ lineitem.arrival_date }}</div>
+          <div class="col-1"></span>
+            <div class="vl"><span class="dot1"></span><span class="dot2"></span></div>
+          </div>
+          <div class="col-9">{{ paths.departure }}{{ cities.city_name }} <br>{{ cities.airport }}<br><br><br><br> {{ paths.destination }}{{ cities2.city_name }}<br>{{ cities2.airport }}</div>
+        </div>
+      </div>
+    </div><br>
+  </form>
+
+    {% endfor %}
+  </div>
+  </div>
+</body>
+{% endblock %}
