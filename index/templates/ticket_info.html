@@ -1,12 +1,14 @@
 {% extends 'components/site_base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}ฺBooking ticket{% endblock %}
 
 {% block content %}
 
 <body style="background-color:#BCE6FF;">
-    <form>
+    
     {% include 'components/site_header.html' %}
+    <form action="payment" method="post">
+    {% csrf_token %}
     <br>
     <div class="row">
         <div class="col-sm-3"></div>
@@ -59,10 +61,23 @@
                 <div class="card" style="width:330px;height:300px;">
                 <h5 class="card-header" id="card-header">{{ paths.departure }}<i class="bi bi-arrow-right"></i> {{ paths.destination }}</h5>
                 <div class="card-body">
-                    <p>ขาไป</p>
-
+                    <h6>ขาไป {{ flights.departure_date }}</h6>
+                    <h5> {{ flights.airline }}</h5>
+                    <div class="row justify-content-space-between p-1 rounded">
+                        <div class="col-4" align="center">
+                            <p class="fs-6">{{ flights.departure_time }}</p>
+                            <p class="fs-6">{{ paths.departure }}</p>
+                        </div>
+                        <div class="col-4" align="center">
+                            {{ flights.duration }} <br>
+                            <span id="boot-icon" class="bi bi-three-dots" style="font-size:2rem;"></span>
+                        </div>
+                        <div class="col-4" align="center">
+                            <p class="fs-6">{{ flights.arrival_time }}</p>
+                            <p class="fs-6">{{ paths.destination }}</p>
+                        </div>
                 </div>
-            </div><br><br>
+            </div><br><br><br><br>
             <button type="submit" class="btn btn-primary">ดำเนินการต่อ</button>
         </div>
     </div>

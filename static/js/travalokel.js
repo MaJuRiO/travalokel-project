@@ -34,6 +34,7 @@ $(document).ready(function () {
             return false;
         }
         const Url = start + "/" + goal + "/" + flightDate + "/" + seatclass;
+        localStorage.setItem("url",Url);
         window.open("/flight/list/" + Url);
         $.ajax({
             url: "/flight/list/" + start +"/" +goal +"/" + flightDate + "/" + seatclass,
@@ -49,5 +50,3 @@ $(document).ready(function () {
         });
     });
 });
-
-function get_flight_detail(flight_id) { }

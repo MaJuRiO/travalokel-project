@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;800&display=swap');
+
+*{
+    font-family: 'Roboto Slab', serif;
+}
+
 .bg{
     background-image: url(/static/img/bg-home.png); 
     background-size: cover;
     min-height: 1440;
     isolation: isolate;
+    
 }
 
 .bg::after {

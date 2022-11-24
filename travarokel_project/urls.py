@@ -23,9 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
     path('users/', include('app_users.urls')),
-    path('booking',views.booking,name="booking"),
-    path('city/list',views.CityList.as_view(),name="citylist"),
-    path('searchflight',views.search,name="search"),
+    path('booking',views.booking),
+    path('payment',views.Addpassenger),
+    path('city/list',views.CityList.as_view()),
+    path('flight/detail/<str:id>',views.FlightDetail.as_view(),name="flightDetail"),
     path('flight/list/<str:start>/<str:goal>/<str:date>/<str:seat_type>',views.FlightList.as_view(),name="FlightList"),
-    path('flight/booking/<str:start>/<str:goal>/<str:date>/<str:seat_type>',views.bookingflight.as_view(),name="booking")
+    path('flight/booking/<str:start>/<str:goal>/<str:date>/<str:seat_type>',views.bookingflight.as_view(),name="booking"),
+    
 ]
