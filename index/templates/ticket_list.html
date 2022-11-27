@@ -1,7 +1,9 @@
 {% extends 'components/site_base.html' %}
-
+{% load static %}
 {% block title %}Flight list{% endblock %}
-
+{% block head %}
+<script src="{% static 'js/my_booking.js' %}"></script>
+{% endblock %}
 {% block content %}
 
 <body class="bg">

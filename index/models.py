@@ -33,7 +33,7 @@ class Flight(models.Model):
     path_id = models.ForeignKey(Path,on_delete=models.CASCADE, db_column='path_id')
     departure_time = models.TimeField()
     arrival_time = models.TimeField()
-    duration = models.TimeField()
+    duration = models.DurationField()
     arrival_date = models.DateTimeField(blank=True,null=True)
     departure_date = models.DateTimeField(blank=True,null=True)
     class Meta:

@@ -1,25 +1,24 @@
-/* mali-regular - thai_latin 
+/* bai-jamjuree-regular - thai_latin */
 @font-face {
-    font-family: "Mali";
+    font-family: 'Bai Jamjuree';
     font-style: normal;
     font-weight: 400;
-    src: local(""),
-        url("static/fonts/mali-v9-thai_latin-regular.woff2") format("woff2"),
-        url("static/fonts/mali-v9-thai_latin-regular.woff") format("woff");
-}*/
-
-/* mali-600 - thai_latin */
-@font-face {
-    font-family: "Mali";
+    src: local(''),
+         url('../fonts/bai-jamjuree-v11-thai_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/bai-jamjuree-v11-thai_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* bai-jamjuree-600 - thai_latin */
+  @font-face {
+    font-family: 'Bai Jamjuree';
     font-style: normal;
     font-weight: 600;
-    src: local(""),
-        url("static/fonts/mali-v9-thai_latin-600.woff2") format("woff2"),
-        url("static/fonts/mali-v9-thai_latin-600.woff") format("woff");
-}
+    src: local(''),
+         url('../fonts/bai-jamjuree-v11-thai_latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/bai-jamjuree-v11-thai_latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
 
 * {
-    font-family: "Mali", sans-serif;
+    font-family: "Bai Jamjuree", sans-serif;
 }
 
 .bg {
@@ -100,4 +99,6 @@ ul {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
+    top: 180px;
+    left: 191px;
 }
