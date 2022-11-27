@@ -12,7 +12,7 @@
     {% for lineitem in flights %}
     <div id="info-flight-{{ forloop.counter }}"></div>
     <div class="row justify-content-space-between p-1 rounded" style="border:1px solid gold;">
-      <div class="col-3" id="headline"> {{ lineitem.airline }} <br><span id="flight_id">{{lineitem.flight_id}}</span></div>
+      <div class="col-3" id="headline"> {{ lineitem.airline }} <br><span id="flight_id{{ forloop.counter }}">{{lineitem.flight_id}}</span></div>
       <div class="col-2" align="center">
         <p class="fs-6">{{ lineitem.departure_time }}</p>
         <p class="fs-6">{{ paths.departure }}</p>
@@ -25,7 +25,7 @@
         <p class="fs-6">{{ lineitem.arrival_time }}</p>
         <p class="fs-6">{{ paths.destination }}</p>
       </div>
-      <div class="col-3" align="right"> <button type="button" class="btn btn-primary" id="selectflight">เลือก</button>
+      <div class="col-3" align="right"> <button type="button" class="btn btn-primary" id="selectflight{{ forloop.counter }}">เลือก</button>
       </div>
       <div>
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse"

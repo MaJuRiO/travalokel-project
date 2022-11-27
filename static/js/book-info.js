@@ -20,5 +20,29 @@ $(document).ready(function () {
             console("Error ${error}")
         }
     })
+
+    $('#btn1').click(function () {
+        $.ajax({                                                // call backend /invoice/create
+            url:  '/receipt/create',
+            type:  'post',
+            data: $('#form_receipt').serialize() + "&lineitem=" +lineitem_to_json(),
+            headers: { "X-CSRFToken": token },
+            dataType:  'json',
+            success: function  (data) {
+                if (data.error) {                               // if backend return error message, log it
+                    console.log(data.error);
+                    alert('การบันทึกล้มเหลว');
+                } else {
+                    $('#txt_ReceiptNo').val(data.receipt.receipt_no)    // SAVE success, show new invoice no
+                    alert('บันทึกสำเร็จ');
+                }                    
+            },
+        })
+
+
+
+
+    })
+
 })
 
