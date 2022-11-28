@@ -7,7 +7,7 @@
 {% block content %}
 
 <body style="background-color:#BCE6FF;">
-    
+<form action="payment" method="post">  
     {% include 'components/site_header.html' %}
     {% csrf_token %}
     <br>
@@ -82,5 +82,6 @@
             <button type="submit" class="btn btn-primary" id="btn1">ดำเนินการต่อ</button>
         </div>
     </div>
+</form> 
 </body>
 {% endblock %}
