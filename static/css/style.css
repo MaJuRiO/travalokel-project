@@ -1,22 +1,16 @@
 /* bai-jamjuree-regular - thai_latin */
 @font-face {
-    font-family: 'Bai Jamjuree';
+    font-family: "Bai Jamjuree";
     font-style: normal;
     font-weight: 400;
-    src: local(''),
-         url('../fonts/bai-jamjuree-v11-thai_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/bai-jamjuree-v11-thai_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* bai-jamjuree-600 - thai_latin */
-  @font-face {
-    font-family: 'Bai Jamjuree';
-    font-style: normal;
-    font-weight: 600;
-    src: local(''),
-         url('../fonts/bai-jamjuree-v11-thai_latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/bai-jamjuree-v11-thai_latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
+    src: local(""),
+        url("../fonts/bai-jamjuree-v11-thai_latin-regular.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url("../fonts/bai-jamjuree-v11-thai_latin-regular.woff") format("woff");
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
 
+/* bai-jamjuree-600 - thai_latin */
 * {
     font-family: "Bai Jamjuree", sans-serif;
 }
@@ -24,13 +18,14 @@
 .bg {
     background-image: url(/static/img/bg-home.png);
     background-size: cover;
-    min-height: 1440;
+    background-attachment: fixed;
     isolation: isolate;
+    background-repeat: no-repeat;
 }
 
 .bg::after {
     content: "";
-    position: absolute;
+    position: fixed;
     z-index: -1;
     inset: 0;
     background-color: #bce6ff;

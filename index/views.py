@@ -34,49 +34,51 @@ def Addpassenger(request):
             next_id_no = id_no_temp[0] + str(int(id_no_temp[1])+1)
         else:
             next_id_no = "7215"
-        fname = request.POST['First_name']
-        lname = request.POST['Last_name']
-        email = request.POST['email']
-        phone = request.POST['phonenumber']
-            
-            
+        fname           = request.POST['First_name']
+        lname           = request.POST['Last_name']
+        email           = request.POST['email']
+        phone           = request.POST['phonenumber']
+
+        flight_id       =   request.POST['flight_id']
+        seat_class      =   request.POST['seat_class']
+        total_amount    =   request.POST['total_amount']
+        username        =   request.POST['username']
+        booking_date    =   request.POST['booking_date']
+        departure_date  =   request.POST['departure_date']
+        ticket = createticket(flight_id,seat_class,total_amount,username,booking_date,departure_date)
+        
         passenger = Passenger.objects.create(
                 id_no=next_id_no,
                 first_name=fname, 
                 last_name=lname, 
                 email=email,
-                phone_no=phone)
+                phone_no=phone,
+                ticket_id=ticket)
         try:passenger.save()
         except: redirect('/')
 
     return render(request,'payment.html')
 
-def createticket(flight_id,departure_date,seat_class,total_amount,username):
-        
+def createticket(flight_id,seat_class,total_amount,username,booking_date,departure_date):
+    print(total_amount)    
     if Ticket.objects.count() != 0:
         ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
         next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1)
     else:
-        next_ticket_id = "TK100"
-
-    status = False
-    if status == True:
-        status = 'CONFIRMED'
-    else: 
-        status = 'PENDING'
+        next_ticket_id = "AC001"
 
     ticket_id = next_ticket_id
-    date = reFormatDateYYYYMMDD(departure_date)
+    booking_date = reFormatDateYYYYMMDDV2(booking_date)
 
-    print(ticket_id,flight_id,date,seat_class,status)
+    
     ticket = Ticket.objects.create(
             ticket_id=ticket_id,
-            flight_id_id=flight_id,
+            flight_id=flight_id,
             seat_class=seat_class,
-            status=status,
             total_amount=total_amount,
-            departure_date=date,
-            username =username         
+            username =username,
+            booking_date=booking_date,
+            departure_date=departure_date                    
             )
     ticket.save()
 
@@ -121,16 +123,13 @@ class FlightList(View):
         cities2 = list(City.objects.filter(city_id=goal).values())
         flights = list(Flight.objects.select_related('destination','departure','path_id').filter(
             path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"],departure_date=date).values())
-        #flight_detail = list(FlightClass.objects.select_related("flight_id").filter(flight_id=flight_id).values('flight_id','seat_class','price'))
+    
         data = dict()
         data['paths'] = paths[0]
         data['flights'] = flights
         data['cities'] = cities[0]
         data['cities2'] = cities2[0]
-        #data['flight_detail'] = flight_detail[0]
         data['seatclass'] = seat_type
-        print(Flight.objects.select_related('destination','departure','path_id').filter(
-            path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"],departure_date=date).values('flight_id'))
         return render(request, 'ticket_list.html', data)
 
 class FlightDetail(View):
@@ -154,6 +153,11 @@ def reFormatDateYYYYMMDD(yyyymmdd):
     if (yyyymmdd == ''):
             return ''
     return yyyymmdd[6:10] + "-" + yyyymmdd[3:5] + "-" + yyyymmdd[:2]
+
+def reFormatDateYYYYMMDDV2(yyyymmdd):
+    if (yyyymmdd == ''):
+        return ''
+    return yyyymmdd[:4] + "-" + yyyymmdd[5:7] + "-" + yyyymmdd[8:10]
 
 def reFormatNumber(str):
         if (str == ''):

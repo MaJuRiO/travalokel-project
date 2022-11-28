@@ -7,7 +7,7 @@
 {% block content %}
 
 <body style="background-color:#BCE6FF;">
-<form action="payment" method="post">  
+<form action="/payment" method="POST">  
     {% include 'components/site_header.html' %}
     {% csrf_token %}
     <br>
@@ -36,21 +36,21 @@
                         <div class="row">
                             <div class="col-6">
                                 <label for="First_name" class="form-label">ชื่อจริงและชื่อกลาง</label>
-                                <input type="text" class="form-control" id="First_name" aria-label="First name">
+                                <input type="text" class="form-control" name="First_name" aria-label="First name">
                             </div>
                             <div class="col-6">
                                 <label for="Last_name" class="form-label">นามสกุล</label>
-                                <input type="text" class="form-control" id="Last_name" aria-label="Last name">
+                                <input type="text" class="form-control" name="Last_name" aria-label="Last name">
                             </div>
                         </div><br>
                         <div class="row">
                             <div class="col-6">
                                 <label for="phonenumber" class="form-label">หมายเลขโทรศัพท์มือถือ</label>
-                                <input type="tel" class="form-control" id="phonenumber" aria-label="First name">
+                                <input type="tel" class="form-control" name="phonenumber" aria-label="First name">
                             </div>
                             <div class="col-6">
                                 <label for="email" class="form-label">อีเมล์</label>
-                                <input type="email" class="form-control" id="email" aria-label="Last name">
+                                <input type="email" class="form-control" name="email" aria-label="Last name">
                             </div>
                         </div>
                     </div>
@@ -79,9 +79,16 @@
                         </div>
                 </div>
             </div><br><br><br><br>
-            <button type="submit" class="btn btn-primary" id="btn1">ดำเนินการต่อ</button>
+            <button type="submit" class="btn btn-primary">ดำเนินการต่อ</button>
         </div>
     </div>
+    <input type='hidden' id='flight_id' name="flight_id" value="">
+    <input type='hidden' id='seat_class' name="seat_class" value="">
+    <input type='hidden' id='total_amount' name="total_amount" value="">
+    <input type='hidden' id='booking_date' name="booking_date" value="">
+    <input type='hidden' id='departure_date' name="departure_date" value="">
+    <input type='hidden' id='username' name="username" value="{{ user.username }}">
+    
 </form> 
 </body>
 {% endblock %}

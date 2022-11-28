@@ -82,7 +82,6 @@ class Ticket(models.Model):
     flight_id = models.CharField(max_length=5)
     username = models.CharField(max_length=100)
     seat_class = models.CharField(max_length=10)
-    status = models.CharField(max_length=10)
     total_amount = models.FloatField(null=True, blank=True)
     departure_date = models.DateField()
     booking_date = models.DateTimeField(blank=True,null=True)
