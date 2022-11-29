@@ -31,7 +31,9 @@
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
           data-bs-target="#flightinfo{{ forloop.counter }}" aria-expanded="false"
           aria-controls="collapseExample">รายละเอียดเที่ยวบิน</button>
+          {% if user.is_authenticated %}
         <button type="button" class="btn btn-primary" id="selectflight{{ forloop.counter }}">เลือก</button>
+          {% endif %}
       </div>
     </div>
     <div class="collapse" id="flightinfo{{ forloop.counter }}">

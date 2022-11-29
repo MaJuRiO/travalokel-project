@@ -59,8 +59,7 @@ def Addpassenger(request):
 
     return render(request,'payment.html')
 
-def createticket(flight_id,seat_class,total_amount,username,booking_date,departure_date):
-    print(total_amount)    
+def createticket(flight_id,seat_class,total_amount,username,booking_date,departure_date):  
     if Ticket.objects.count() != 0:
         ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
         next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1)
@@ -69,7 +68,6 @@ def createticket(flight_id,seat_class,total_amount,username,booking_date,departu
 
     ticket_id = next_ticket_id
     booking_date = reFormatDateYYYYMMDDV2(booking_date)
-
     
     ticket = Ticket.objects.create(
             ticket_id=ticket_id,
