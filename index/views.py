@@ -89,7 +89,7 @@ def payment(request):
         ticket_id = request.POST.get('ticket_id')
         card_no = request.POST.get('ticket_id')
         username = request.POST.get('username')
-        holder_name = request.POST.get('cardName')
+        holder_name = request.POST.get('card_name')
         try:
             ticket = Ticket.objects.get(ticket_id=ticket_id)
             ticket.status = 'COMPLETED'
