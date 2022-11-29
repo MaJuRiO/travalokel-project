@@ -87,7 +87,7 @@ def createticket(flight_id,seat_class,total_amount,username,booking_date,departu
 def payment(request):
     if request.method == 'POST':
         ticket_id = request.POST.get('ticket_id')
-        card_no = request.POST.get('ticket_id')
+        card_no = request.POST.get('card_no')
         username = request.POST.get('username')
         holder_name = request.POST.get('card_name')
         try:
