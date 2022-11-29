@@ -1,38 +1,38 @@
 {% extends 'components/site_base.html' %}
-
-{% block title %}Home{% endblock %}
+{% load static %}
+{% block title %}Payment{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="payment-content">
-        <div class="payment-box-head">
-        </div>
-        <div class="payment-box">
-            <form action="confirm" method="post">
+<body class="bg" >
+{% include 'components/site_header.html' %}  
+<div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1100px;">
+            <form action="completedpayment" method="post">
+                <input type='hidden' id='username' name="username" value="{{ user.username }}">
                 {% csrf_token %}
                 <h2 align="center">Payment Information</h2>
-                <div class="row col2">
-                    <div class="ticket_id col-6">
-                        <label>TICKET ID</label><br>
-                        <input type="text" name="ticket_id" value="{{ticket_id}}" readonly>
+                <div class="card">
+                    <div class="card-header">Pay with card</div>                    
+                        <div class="row col2">
+                            <div class="ticket_id col-2 ">
+                                <label class="mx-2">TICKET ID</label><br>
+                                <input class="form-control mx-2" type="text" name="ticket_id" value=" {{ticket_id}}" readonly>
+                            </div>
+                        <div class="col-4"></div>
+                            <div class="amount col-2">
+                            <label>TICKET PRICE</label><br>
+                            <input class="form-control" type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}" readonly>
+                            </div>
+                        </div>
+                    <div class="creditcard col-4 mx-2"><br>
+                        <label>Credit Card Number<span>*</span></label><br>
+                        <input class="form-control " type="tel" pattern="[0-9]*" name="card_no" id="cardNo" autocomplete="off" maxlength="19" placeholder="Enter card number" title="Fill card number again" required><br>
+                        <label>Credit Card Holder's Name<span>*</span></label><br>
+                        <input class="form-control" type="text" name="card_name" id="cardName" placeholder="Enter name" pattern="[A-Za-z]{1,20}" title="Fill holder's name again" required>
                     </div>
-                    <div class="amount col-6">
-                        <label>PAYMENT AMOUNT</label><br>
-                        <input type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}" readonly>
-                    </div>
-                </div>
-                <div class="creditcard">
-                    <label>Credit Card Number<span>*</span></label><br>
-                    <input type="tel" pattern="[0-9]*" name="card_no" id="cardNo" autocomplete="off" maxlength="19"
-                        placeholder="Enter card number" title="Fill card number again" required><br>
-                    <label>Credit Card Holder's Name<span>*</span></label><br>
-                    <input type="text" name="card_name" id="cardName" placeholder="Enter name" 
-                    pattern="[A-Za-z]{1,20}" title="Fill holder's name again" required>
-                </div>
-                <div class="expire-date">
+                <div class="expire-date mx-2">
                     <label>Expiration Date<span>*</span></label><br>
-                    <div class="expiry-input-div">
-                        <div class="month-div">
+                    <div class="row">
+                        <div class="col-2">
                             <select name="expMonth" id="expiry_month" class="form-control" required>
                                 <option value="default">Month</option>
                                 <option value="01">01</option>
@@ -49,7 +49,7 @@
                                 <option value="12">12</option>
                             </select>
                         </div>
-                        <div class="yeae-div">
+                        <div class="col-2">
                             <select name="expYear" id="expiry_year" class="form-control" required>
                                 <option value="">Year</option>
                                 <option value="2020">2020</option>
@@ -91,11 +91,9 @@
                                 <option value="2056">2056</option>
                             </select>
                         </div>
-                    </div>
-                </div>
-                <div class="cvv">
+                        <div class="col-2">
                     <label>CVV Number<span>*</span></label><br>
-                    <input type="password" name="cvv_no" pattern="[0-9]{3}" title="Invalid CVV Number"placeholder="Enter CVV" required>
+                    <input class="form-control" type="password" name="cvv_no" pattern="[0-9]{3}" title="Invalid CVV Number"placeholder="Enter CVV" required>
                 </div>
                 <div class="button">
                     <a href="my_booking" class="cancle" id="btnCancle">CANCLE</a>
@@ -107,7 +105,5 @@
                     <input type="hidden" name="ticket_id" value="{{ticket_id}}" readonly>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
+</body>
 {% endblock %}

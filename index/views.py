@@ -33,7 +33,7 @@ def Addpassenger(request):
             id_no_temp = [re.findall(r'(\w+?)(\d+)', id_no_max)[0]][0]
             next_id_no = id_no_temp[0] + str(int(id_no_temp[1])+1)
         else:
-            next_id_no = "7215"
+            next_id_no = "7201"
         fname           = request.POST['First_name']
         lname           = request.POST['Last_name']
         email           = request.POST['email']
@@ -54,17 +54,18 @@ def Addpassenger(request):
                 email=email,
                 phone_no=phone,
                 ticket_id=ticket)
+        ticket_id = ticket.ticket_id
         try:passenger.save()
+            
         except: redirect('/')
-
-    return render(request,'payment.html')
+    return render(request,'payment.html',{'ticket_id':ticket_id,'total_amount':total_amount})
 
 def createticket(flight_id,seat_class,total_amount,username,booking_date,departure_date):  
     if Ticket.objects.count() != 0:
         ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
-        next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1)
+        next_ticket_id = ticket_id_max[0:6] + str(int(ticket_id_max[6:10])+1)
     else:
-        next_ticket_id = "AC001"
+        next_ticket_id = "TICKET1001"
 
     ticket_id = next_ticket_id
     booking_date = reFormatDateYYYYMMDDV2(booking_date)
@@ -76,11 +77,41 @@ def createticket(flight_id,seat_class,total_amount,username,booking_date,departu
             total_amount=total_amount,
             username =username,
             booking_date=booking_date,
-            departure_date=departure_date                    
+            departure_date=departure_date,
+            status = 'PENDING'                    
             )
     ticket.save()
 
     return ticket
+
+def payment(request):
+    if request.method == 'POST':
+        ticket_id = request.POST.get('ticket_id')
+        card_no = request.POST.get('ticket_id')
+        username = request.POST.get('username')
+        holder_name = request.POST.get('cardName')
+        try:
+            ticket = Ticket.objects.get(ticket_id=ticket_id)
+            ticket.status = 'COMPLETED'
+            ticket.save()
+
+            payment = Payment.objects.create(
+                card_no = card_no,
+                username = username,
+                holder_name = holder_name,
+                ticket_id = ticket_id
+            )
+            payment.save()
+
+
+            return render(request,'completedpayment.html',{
+                'ticket_id': ticket_id
+        })
+        except Exception as e:
+            return HttpResponse(e)
+    else:
+        return HttpResponse("Method must be post.")
+    
 
 class CityList(View):
     def get(self,request):

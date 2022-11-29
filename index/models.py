@@ -85,6 +85,7 @@ class Ticket(models.Model):
     total_amount = models.FloatField(null=True, blank=True)
     departure_date = models.DateField()
     booking_date = models.DateTimeField(blank=True,null=True)
+    status = models.CharField(max_length=10)
     class Meta:
         db_table = "ticket"
         managed = False
