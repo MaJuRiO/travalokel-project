@@ -26,6 +26,13 @@ def booking(request):
 def bookingflight(request):
     return render(request, 'ticket_info.html')
 
+def my_booking(request):
+    tickets = list(Ticket.objects.filter(username=request.user.username).order_by('-ticket_id').values('ticket_id','flight_id','departure_date',
+                                                                                            'seat_class','total_amount','booking_date','status'))
+    data=dict()
+    data['tickets'] = tickets
+    return render(request, 'my_booking.html', data)
+
 def Addpassenger(request):
     if request.method == 'POST':
         if Passenger.objects.count() != 0:
@@ -112,6 +119,19 @@ def payment(request):
     else:
         return HttpResponse("Method must be post.")
     
+@method_decorator(csrf_exempt, name='dispatch')
+class TicketDelete(View):
+    def post(self, request):
+        ticket_id = request.POST["ticket_id"]
+        data = dict()
+        ticket = Ticket.objects.get(ticket_id=ticket_id)
+        if ticket:
+            Passenger.objects.filter(ticket_id=ticket_id).delete()
+            ticket.delete()
+            data['message'] = "Ticket Deleted!"
+        else:
+            data['error'] = "Error!"
+        return render(request,'my_booking.html', data)
 
 class CityList(View):
     def get(self,request):
