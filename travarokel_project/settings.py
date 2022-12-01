@@ -76,15 +76,26 @@ WSGI_APPLICATION = 'travarokel_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'ewznzela',
+#        'USER': 'ewznzela',
+#        'PASSWORD': 'UNwci_Zxu2gFa5x3toGb1zX1zd6zxbGS',
+#        'HOST': 'arjuna.db.elephantsql.com',
+#        'PORT': '5432',
+#        'OPTIONS': {"sslmode":"require"},v
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'thavarokeladmin@thavarokel-database',
-        'PASSWORD': 'cpe231@1234',
-        'HOST': 'thavarokel-database.postgres.database.azure.com',
-        'PORT': '5432',
-        'OPTIONS': {"sslmode":"require"},
+        'NAME': 'CPE231 PRoject',
+        'USER': 'postgres',
+        'PASSWORD': 'Mew!28092544',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

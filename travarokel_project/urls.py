@@ -28,7 +28,7 @@ urlpatterns = [
     path('payment',views.Addpassenger),
     path('completedpayment',views.payment),
     path('mybooking',views.my_booking, name='mybooking'),
-    path('cancel', views.TicketDelete.as_view(), name="cancelticket"),
+    path('cancelticket', views.TicketDelete.as_view(), name="cancelticket"),
 
     path('city/list',views.CityList.as_view()),
     path('flight/detail/<str:id>',views.FlightDetail.as_view(),name="flightDetail"),

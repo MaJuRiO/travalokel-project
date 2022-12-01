@@ -33,6 +33,8 @@
           aria-controls="collapseExample">รายละเอียดเที่ยวบิน</button>
           {% if user.is_authenticated %}
         <button type="button" class="btn btn-primary" id="selectflight{{ forloop.counter }}">เลือก</button>
+          {% else %}
+        <h6>กรุณา register และ login ก่อนทำการจอง</h6>
           {% endif %}
       </div>
     </div>
