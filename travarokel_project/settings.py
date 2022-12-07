@@ -91,9 +91,9 @@ WSGI_APPLICATION = 'travarokel_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tha',
+        'NAME': 'travarokel',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'Mew!28092544',
         'HOST': 'localhost',
         'PORT': '',
     }
