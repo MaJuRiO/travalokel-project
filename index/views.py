@@ -193,6 +193,27 @@ class FlightDetail(View):
         data['paths'] = paths[0]
         return JsonResponse(data)
 
+class TicketReport(View):
+    def get(self, request, pk):
+        ticket_id = pk
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'flight_id', 'seat_class', 'status', 'total_amount', 'username', 'booking_date', 'departure_date'))
+        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
+        flight_id = ticket[0]['flight_id']
+        flight_detail = list(Flight.objects.select_related("flight_id","path_id").filter(flight_id=flight_id).values(
+                                                            'flight_id','airline', 'path_id__departure', 'path_id__destination', 'arrival_date', 'arrival_time', 'departure_date', 'departure_time', 'duration', 'flight_id', 'path_id', 'path_id_id'))
+        departure_code = flight_detail[0]['path_id__departure']
+        destination_code = flight_detail[0]['path_id__destination']
+        departure = list(City_A.objects.filter(city_id=departure_code).values('city_id','city_name','airport'))
+        destination = list(City_B.objects.filter(city_id=destination_code).values('city_id','city_name','airport'))
+        data = dict()
+        data['ticket'] = ticket[0]
+        data['passenger'] = passenger
+        data['flight_detail'] = flight_detail[0]
+        data['departure'] = departure[0]
+        data['destination'] = destination[0]
+        #return JsonResponse(data)
+        return render(request, 'report.html', data)
+
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):
             return ''

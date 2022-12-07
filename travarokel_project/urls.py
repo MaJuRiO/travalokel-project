@@ -29,10 +29,10 @@ urlpatterns = [
     path('completedpayment',views.payment),
     path('mybooking',views.my_booking, name='mybooking'),
     path('cancelticket', views.TicketDelete.as_view(), name="cancelticket"),
-
     path('city/list',views.CityList.as_view()),
     path('flight/detail/<str:id>',views.FlightDetail.as_view(),name="flightDetail"),
     path('flight/list/<str:start>/<str:goal>/<str:date>/<str:seat_type>',views.FlightList.as_view(),name="FlightList"),
     path('flight/booking',views.bookingflight),
+    path('ticket/report/<str:pk>', views.TicketReport.as_view(), name='ticket_report'),
     
 ]

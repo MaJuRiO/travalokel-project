@@ -5,7 +5,26 @@ from django.contrib.auth.models import User
 from django.db.models import fields
 
 # Create your models here.
-#Departure
+class City_A(models.Model):
+    city_id = models.CharField(max_length=5,primary_key=True)
+    city_name = models.CharField(max_length=50)
+    airport = models.TextField()
+    class Meta:
+        db_table = "city"
+        managed = False
+    def __str__(self):
+        return self.city_name
+        
+#Destination
+class City_B(models.Model):
+    city_id = models.CharField(max_length=5,primary_key=True)
+    city_name = models.CharField(max_length=50)
+    airport = models.TextField()
+    class Meta:
+        db_table = "city"
+        managed = False
+    def __str__(self):
+        return self.city_name
 
 class City(models.Model):
     city_id = models.CharField(max_length=5,primary_key=True)
