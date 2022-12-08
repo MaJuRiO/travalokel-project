@@ -1,8 +1,4 @@
-
 $(document).ready(function () {
-
-
-
     $("#selectflight1").click(function () {
         
         const id = (document.getElementById('flight_id1'))
