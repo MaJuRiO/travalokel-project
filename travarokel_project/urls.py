@@ -32,7 +32,7 @@ urlpatterns = [
     path('city/list',views.CityList.as_view()),
     path('flight/detail/<str:id>',views.FlightDetail.as_view(),name="flightDetail"),
     path('flight/list/<str:start>/<str:goal>/<str:date>/<str:seat_type>',views.FlightList.as_view(),name="FlightList"),
-    path('flight/booking',views.bookingflight),
+    path('flight/booking',views.bookingflight, name="bookpage"),
     path('ticket/report/<str:pk>', views.TicketReport.as_view(), name='ticket_report'),
     
 ]

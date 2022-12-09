@@ -71,29 +71,32 @@ ul {
 }
 
 .vl {
-    border-left: 2px solid;
+    border-left: 3px solid;
     border-image: linear-gradient(180deg, rgb(14, 14, 218), rgba(0, 212, 255, 1)) 1;
     height: 165px;
 }
 
 .dot1 {
-    height: 5px;
-    width: 5px;
+    height: 6px;
+    width: 6px;
     background-color: rgb(14, 14, 218);
     border-radius: 50%;
     display: inline-block;
     position: absolute;
     top: 12px;
-    left: 191px;
+    left:178px;
+
 }
 
 .dot2 {
-    height: 5px;
-    width: 5px;
+    height: 6px;
+    width: 6px;
     background-color: rgba(0, 212, 255, 1);
     border-radius: 50%;
     display: inline-block;
     position: absolute;
     top: 180px;
-    left: 191px;
+    left:178px;
+
+    
 }

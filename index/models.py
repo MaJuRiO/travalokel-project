@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+import datetime
 from django.contrib.auth.models import User
 
 from django.db.models import fields
@@ -25,7 +25,7 @@ class City_B(models.Model):
         managed = False
     def __str__(self):
         return self.city_name
-
+        
 class City(models.Model):
     city_id = models.CharField(max_length=5,primary_key=True)
     city_name = models.CharField(max_length=50)
@@ -62,7 +62,7 @@ class Flight(models.Model):
         return str(self.flight_id)
 
 class FlightClass(models.Model):
-    flight_id = models.CharField(max_length=5,primary_key=True)
+    flight_id = models.ForeignKey(Flight,on_delete=models.CASCADE, db_column='flight_id')
     seat_class = models.CharField(max_length=10)
     price = models.IntegerField()
     class Meta:

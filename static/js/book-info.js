@@ -1,7 +1,9 @@
 var d = new Date();
 var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+
 $(document).ready(function () {
-    var id=localStorage.getItem("id");
+    const params = (new URL(document.location)).searchParams
+    const id = params.get('flight_ID')
     $.ajax({
         url:  '/flight/detail/' + id,
         type:  'get',

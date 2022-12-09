@@ -157,13 +157,13 @@ class PathDetail(View):
         data['path_detail'] = path_detail
 
         return JsonResponse(data)
-
+        
 class ClassList(View):
     def get(self, request):
         seat_classes = list(FlightClass.objects.all().values())
         data = dict()
         data['seat_classes'] = seat_classes
-        return JsonResponse(data) 
+        return JsonResponse(data)
 
 class FlightList(View):
     def get(self, request, start, goal, date, seat_type):
@@ -172,13 +172,17 @@ class FlightList(View):
         cities2 = list(City.objects.filter(city_id=goal).values())
         flights = list(Flight.objects.select_related('destination','departure','path_id').filter(
             path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"],departure_date=date).values())
-    
+
+        for i in range(len(flights)):
+            flights[i]['price']=(FlightClass.objects.filter(flight_id=flights[i]['flight_id']).values('price'))[0]
+        
         data = dict()
         data['paths'] = paths[0]
         data['flights'] = flights
-        data['cities'] = cities[0]
+        data['cities'] = cities[0] 
         data['cities2'] = cities2[0]
         data['seatclass'] = seat_type
+
         return render(request, 'ticket_list.html', data)
 
 class FlightDetail(View):
@@ -186,7 +190,6 @@ class FlightDetail(View):
         flight = list(Flight.objects.filter(flight_id=id).values('flight_id','airline','path_id','departure_time','arrival_time','duration','arrival_date', 'departure_date'))
         flight_detail = list(FlightClass.objects.select_related("flight_id").filter(flight_id=id).values('flight_id','seat_class','price'))
         paths = list(Path.objects.filter(path_id=Flight.objects.filter(flight_id=id).values('path_id')[0]["path_id"]).values())
-        
         data = dict()
         data['flight'] = flight[0]
         data['flight_detail'] = flight_detail[0]
