@@ -167,22 +167,16 @@ class ClassList(View):
 
 class FlightList(View):
     def get(self, request, start, goal, date, seat_type):
-        paths = list(Path.objects.filter(departure=start,destination=goal).values())
+        path_id     = Path.objects.filter(departure=start,destination=goal).values('path_id')[0]['path_id']
+        paths       = list(Path.objects.filter(departure=start,destination=goal).values())
         cities = list(City.objects.filter(city_id=start).values())
         cities2 = list(City.objects.filter(city_id=goal).values())
-        flights = list(Flight.objects.select_related('destination','departure','path_id').filter(
-            path_id=Path.objects.filter(departure=start,destination=goal).values('path_id')[0]["path_id"],departure_date=date).values())
-
-        for i in range(len(flights)):
-            flights[i]['price']=(FlightClass.objects.filter(flight_id=flights[i]['flight_id']).values('price'))[0]
-        
+        flights     = Flight.objects.all().select_related('flight_id','path_id').filter(path_id=path_id,departure_date=date,flight_id__seat_class=seat_type).values('flight_id','airline','path_id','departure_time','arrival_time','departure_date','duration','arrival_date','path_id__departure','path_id__destination','flight_id__seat_class', 'flight_id__price')
         data = dict()
         data['paths'] = paths[0]
         data['flights'] = flights
         data['cities'] = cities[0] 
         data['cities2'] = cities2[0]
-        data['seatclass'] = seat_type
-
         return render(request, 'ticket_list.html', data)
 
 class FlightDetail(View):

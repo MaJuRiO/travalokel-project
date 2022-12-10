@@ -13,7 +13,7 @@
 
     <div id="info-flight-{{ forloop.counter }}"></div>
     <div class="row justify-content-space-between p-1 rounded" style="border:2px solid gold;">
-      <div class="col-3" id="headline"> {{ lineitem.airline }} <br><span id="flightID">{{lineitem.flight_id}}</span></div>
+      <div class="col-3" id="headline"> {{ lineitem.airline }} <br><span>{{lineitem.flight_id__seat_class}}</span></div>
       <div class="col-2" align="center">
         <p class="fs-6"><date-timeformatchange format=hh/mm/ss >{{ lineitem.departure_time }}</date-timeformatchange></p>
         <p class="fs-6"><time>{{ paths.departure }}</time></p>
@@ -27,7 +27,7 @@
         <p class="fs-6">{{ paths.destination }}</p>
       </div>
       <div class="col-3 justify-content-center" align="center">
-          <span class="fs-4" style="color:rgb(255, 94, 31) ;" id="price">{{ lineitem.price.price }}</span><span class="fs-3"> ฿</span>
+          <span class="fs-4" style="color:rgb(255, 94, 31) ;" id="price">{{ lineitem.flight_id__price }}</span><span class="fs-3"> ฿</span>
       </div>
       <div>
         
@@ -50,7 +50,7 @@
       <div class="card card-body">
         <div class="row">
           <div class="col-2"> {{ lineitem.departure_time }}<br>{{ lineitem.departure_date }}<br><br><i
-              class="bi bi-airplane"></i>{{ lineitem.duration }}<br><br>{{ lineitem.arrival_time }}<br>{{ lineitem.arrival_date }}</div>
+              class="bi bi-airplane"></i><time>{{ lineitem.duration }}</time><br><br>{{ lineitem.arrival_time }}<br>{{ lineitem.arrival_date }}</div>
           <div class="col-1"></span>
             <div class="vl"><span class="dot1"></span><span class="dot2"></span></div>
           </div>

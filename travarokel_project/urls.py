@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from app_users import views
 from index import views
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,3 +37,6 @@ urlpatterns = [
     path('ticket/report/<str:pk>', views.TicketReport.as_view(), name='ticket_report'),
     
 ]
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += path('__debug__/',include(debug_toolbar.urls)),

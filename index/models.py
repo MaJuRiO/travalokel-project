@@ -46,8 +46,19 @@ class Path(models.Model):
     def __str__(self):
         return str(self.path_id)
 
-class Flight(models.Model):
+class FlightClass(models.Model):
     flight_id = models.CharField(max_length=5,primary_key=True)
+    seat_class = models.CharField(max_length=10)
+    price = models.IntegerField()
+    class Meta:
+        db_table = "flight_class"
+        unique_together = (("flight_id", "seat_class"),)
+        managed = False
+    def __str__(self):
+        return str(self.flight_id)
+
+class Flight(models.Model):
+    flight_id = models.ForeignKey(FlightClass,on_delete=models.CASCADE, db_column='flight_id')
     airline = models.CharField(max_length=100)
     path_id = models.ForeignKey(Path,on_delete=models.CASCADE, db_column='path_id')
     departure_time = models.TimeField()
@@ -57,17 +68,6 @@ class Flight(models.Model):
     departure_date = models.DateTimeField(blank=True,null=True)
     class Meta:
         db_table = "flight"
-        managed = False
-    def __str__(self):
-        return str(self.flight_id)
-
-class FlightClass(models.Model):
-    flight_id = models.ForeignKey(Flight,on_delete=models.CASCADE, db_column='flight_id')
-    seat_class = models.CharField(max_length=10)
-    price = models.IntegerField()
-    class Meta:
-        db_table = "flight_class"
-        unique_together = (("flight_id", "seat_class"),)
         managed = False
     def __str__(self):
         return str(self.flight_id)
