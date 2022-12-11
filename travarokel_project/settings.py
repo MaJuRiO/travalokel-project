@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'index',
     'app_users.apps.AppUsersConfig',
-    'debug_toolbar',
+#    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+#    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'travarokel_project.urls'
@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'travarokel_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'travarokel',
+        'NAME': 'tha',
         'USER': 'postgres',
-        'PASSWORD': 'Mew!28092544',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -124,9 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+#INTERNAL_IPS = [
+#    "127.0.0.1",
+#]
 
 LANGUAGE_CODE = 'en-us'
 

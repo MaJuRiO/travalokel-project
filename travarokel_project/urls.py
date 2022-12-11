@@ -37,6 +37,6 @@ urlpatterns = [
     path('ticket/report/<str:pk>', views.TicketReport.as_view(), name='ticket_report'),
     path('ticket/print', views.PrintTicket.as_view(), name="printTicket"),
 ]
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += path('__debug__/',include(debug_toolbar.urls)),
+#if settings.DEBUG:
+#    import debug_toolbar
+#    urlpatterns += path('__debug__/',include(debug_toolbar.urls)),

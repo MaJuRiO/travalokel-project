@@ -10,7 +10,7 @@
   {% include 'components/site_header.html' %}
       <br><br><br>
       <div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1024px; height: 400px; ">
-        <span class="text-center d-block p-2 text-bg-primary">จองตั๋วเครื่่องบิน</span><br><br>
+        <span class="text-center d-block p-2 text-bg-primary">ค้นหาเที่ยวบิน</span><br><br>
         <form class="row g-3 needs-validation" novalidate>
 
             <div class="form-floating col-md-6" method="post">
@@ -58,6 +58,25 @@
             </div>
           </form>
       </div>
+      <div class="text-center">
+        <p style="font-size: 100%;">**กดปุ่มวิธีการค้นหาเพื่อดูขั้นตอนการค้นหาเที่ยวบิน**</p>
+        <!-- Button to launch a modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">วิธีการค้นหา</button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">         
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Add image inside the body of modal -->
+                <div class="modal-body text-center">
+                    <img id="image" src="static/img/img01.png" alt="Click on button" style="width:120%;max-width:1000px" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+      </div>
       <div class="scene">
         <span class="cloud cloud--small"></span>
         <svg xmlns="http://www.w3.org/2000/svg" id="plane" class="plane" viewBox="0 0 104 47" x="0" y="0" width="104" height="47" background-color="#ffffff00">
@@ -75,5 +94,6 @@
         <span class="cloud cloud--medium"></span>
         <span class="cloud cloud--large"></span>
       </div>
+      <!-- Adding scripts to use bootstrap -->
 </body>
 {% endblock %}
