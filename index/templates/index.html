@@ -8,7 +8,21 @@
 {% block content %}
 <body class="bg">
   {% include 'components/site_header.html' %}
-      <br><br><br>
+      <br><br>
+      <button class="btn btn-warning" type="submit" id="img01">วิธีการค้นหา</button>
+
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content" id="img01">
+
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+      </div><br>
       <div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1024px; height: 400px; ">
         <span class="text-center d-block p-2 text-bg-primary">ค้นหาเที่ยวบิน</span><br><br>
         <form class="row g-3 needs-validation" novalidate>
