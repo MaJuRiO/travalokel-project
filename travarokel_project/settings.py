@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'index',
     'app_users.apps.AppUsersConfig',
-    "debug_toolbar",
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +135,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

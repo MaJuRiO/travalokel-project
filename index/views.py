@@ -91,6 +91,9 @@ def createticket(flight_id,seat_class,total_amount,username,booking_date,departu
 
     return ticket
 
+def payment02(request):
+    return render(request, 'payment02.html')
+
 def payment(request):
     if request.method == 'POST':
         ticket_id = request.POST.get('ticket_id')
