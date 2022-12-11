@@ -67,9 +67,14 @@
                         <form method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
-                            <button type="submit" class="btn btn-primary btnp" id="btnPrint">Print Ticket</button>
+                            <button type="submit" class="btn btn-primary btnp" id="btnPrint">Print Receipt</button>
                         </form>
                         </div>
+                        <div class="col-auto">
+                            <form method="POST" action="ticket/print">
+                            {% csrf_token %}
+                            <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
+                            <button type="submit" class="btn btn-primary btnp" id="btnPrint">Print Ticket</button></div>
                         <div class="col-auto" >
                         <form action="cancelticket" method="POST">
                             {% csrf_token %}

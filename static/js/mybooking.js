@@ -1,7 +1,3 @@
-$('#btn_cancleticket').click(function () {
-    alert('hi');
-})
-
 $(document).ready( function () {
     $('#btnPrint').click(function () {
         if ($('#txt_ticketID').val() == '') {

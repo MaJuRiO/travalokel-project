@@ -35,7 +35,7 @@ urlpatterns = [
     path('flight/list/<str:start>/<str:goal>/<str:date>/<str:seat_type>',views.FlightList.as_view(),name="FlightList"),
     path('flight/booking',views.bookingflight, name="bookpage"),
     path('ticket/report/<str:pk>', views.TicketReport.as_view(), name='ticket_report'),
-
+    path('ticket/print', views.PrintTicket.as_view(), name="printTicket"),
 ]
 if settings.DEBUG:
     import debug_toolbar

@@ -211,6 +211,26 @@ class TicketReport(View):
         #return JsonResponse(data)
         return render(request, 'report.html', data)
 
+@method_decorator(csrf_exempt, name='dispatch')
+class PrintTicket(View):
+    def post(self, request):
+        idTicket = request.POST["ticket_id"]
+        ticket_detail= list(Ticket.objects.filter(ticket_id=idTicket).values('ticket_id','flight_id','username','seat_class'))
+        flight_id = ticket_detail[0]['flight_id']
+        flight_detail= list(Flight.objects.select_related("flight_id","path_id").filter(flight_id=flight_id).values('airline', 'path_id__departure', 'path_id__destination','arrival_time','departure_time'))
+        city_from = City.objects.filter(city_id=flight_detail[0]['path_id__departure']).values('city_name')
+        city_to = City.objects.filter(city_id=flight_detail[0]['path_id__destination']).values('city_name')
+
+        data=dict()
+        data['ticket_detail']=ticket_detail[0]
+        data['flight_detail']=flight_detail[0]
+        data['city_from'] = city_from[0]
+        data['city_to'] = city_to[0]
+        print(data)
+        return render(request, 'printTicket.html', data )
+        #return JsonResponse(data)
+
+
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):
             return ''
