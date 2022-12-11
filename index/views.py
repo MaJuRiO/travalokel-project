@@ -88,11 +88,7 @@ def createticket(flight_id,seat_class,total_amount,username,booking_date,departu
             status = 'PENDING'                    
             )
     ticket.save()
-
     return ticket
-
-def payment02(request):
-    return render(request, 'payment02.html')
 
 def payment(request):
     if request.method == 'POST':
@@ -130,6 +126,7 @@ class TicketDelete(View):
         ticket = Ticket.objects.get(ticket_id=ticket_id)
         if ticket:
             Passenger.objects.filter(ticket_id=ticket_id).delete()
+            Payment.objects.filter(ticket_id=ticket_id).delete()
             ticket.delete()
             data['message'] = "Ticket Deleted!"
         else:
