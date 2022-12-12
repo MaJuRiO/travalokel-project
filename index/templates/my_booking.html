@@ -108,11 +108,32 @@
                         {% endif %}
                         {% if ticket.status == 'PENDING' %}
                         <div class="col-auto">
-                            <form action="cancelticket" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
-                                <button type="submit" class="btn btn-danger btnp" name="ticket_id" value="{{ticket.ticket_id}}">Cancel Ticket</button>
-                            </form>
+                            <!---------------------------------------------------------MODAL--------------------------------------------------------->
+                            <div class="modal" tabindex="-1" id="DeleteModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" align="center">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Cancle Ticket</h5>
+                                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <i class="bi bi-exclamation-circle" style="font-size:104px;color: #ffc107;"></i><br>
+                                            <h3 style="color: gray;"><b> Are you sure? </b></h3>
+                                            <span>You will not be able to recover this Ticket!</span><br><br>
+                                                <form action="cancelticket" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
+                                                        <div class="row" style="justify-content: center;">
+                                                        <div class="col-6"><button type="submit" class="btn btn-success btnp" name="ticket_id" value="{{ticket.ticket_id}}">Yes, Cancel it!</button></div>
+                                                        <div class="col-6"><button class="btn btn-danger" data-dismiss="modal">No, Dont do that!</button></div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---------------------------------------------------------MODAL--------------------------------------------------------->
                         </div>
                         {% endif %}
                     </div>
