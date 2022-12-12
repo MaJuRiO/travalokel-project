@@ -117,10 +117,10 @@ def payment(request):
             return HttpResponse(e)
     else:
         return HttpResponse("Method must be post.")
-    
-@method_decorator(csrf_exempt, name='dispatch')
-class TicketDelete(View):
-    def post(self, request):
+
+@csrf_exempt    
+def TicketDelete(request):
+    if request.method == 'POST':
         ticket_id = request.POST["ticket_id"]
         data = dict()
         ticket = Ticket.objects.get(ticket_id=ticket_id)
@@ -131,7 +131,7 @@ class TicketDelete(View):
             data['message'] = "Ticket Deleted!"
         else:
             data['error'] = "Error!"
-        return render(request,'my_booking.html', data)
+    return redirect('/mybooking')
 
 class CityList(View):
     def get(self,request):
@@ -211,7 +211,6 @@ class TicketReport(View):
         #return JsonResponse(data)
         return render(request, 'report.html', data)
 
-@method_decorator(csrf_exempt, name='dispatch')
 class PrintTicket(View):
     def post(self, request):
         idTicket = request.POST["ticket_id"]
@@ -226,7 +225,6 @@ class PrintTicket(View):
         data['flight_detail']=flight_detail[0]
         data['city_from'] = city_from[0]
         data['city_to'] = city_to[0]
-        print(data)
         return render(request, 'printTicket.html', data )
         #return JsonResponse(data)
 

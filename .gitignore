@@ -4,5 +4,5 @@
 
 /app_users/__pycache__
 /app_users/migrations/__pycache__
-
+/travarokel_project/settings.py
 .pyc

@@ -3,32 +3,37 @@
 {% block title %}Payment{% endblock %}
 
 {% block content %}
-<body class="bg" >
-{% include 'components/site_header.html' %}  
-<div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1024px;">
-            <form action="completedpayment" method="post">
-                <input type='hidden' id='username' name="username" value="{{ user.username }}">
-                {% csrf_token %}
-                <h2 align="center">Payment Information</h2>
-                <div class="card">
-                    <div class="card-header">Pay with card</div>                    
-                        <div class="row col2">
-                            <div class="ticket_id col-2 ">
-                                <label class="mx-2">TICKET ID</label><br>
-                                <input class="form-control mx-2" type="text" name="ticket_id" value=" {{ticket_id}}" readonly>
-                            </div>
-                        <div class="col-4"></div>
-                            <div class="amount col-2">
-                            <label>TICKET PRICE</label><br>
-                            <input class="form-control" type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}" readonly>
-                            </div>
-                        </div>
-                    <div class="creditcard col-4 mx-2"><br>
-                        <label>Credit Card Number<span>*</span></label><br>
-                        <input class="form-control " type="tel" pattern="[0-9]*" name="card_no" id="cardNo" autocomplete="off" maxlength="19" placeholder="Enter card number" title="Fill card number again" required><br>
-                        <label>Credit Card Holder's Name<span>*</span></label><br>
-                        <input class="form-control" type="text" name="card_name" id="cardName" placeholder="Enter name" pattern="[A-Za-z]{1,20}" title="Fill holder's name again" required>
+
+<body class="bg">
+    {% include 'components/site_header.html' %}
+    <div class="mx-auto text-bg-light p-3 shadow p-3 mb-5 bg-body rounded" style="width: 1024px;">
+        <form action="completedpayment" method="post">
+            <input type='hidden' id='username' name="username" value="{{ user.username }}">
+            {% csrf_token %}
+            <h2 align="center">Payment Information</h2>
+            <div class="card">
+                <div class="card-header">Pay with card</div>
+                <div class="row col2">
+                    <div class="ticket_id col-2 ">
+                        <label class="mx-2">TICKET ID</label><br>
+                        <input class="form-control mx-2" type="text" name="ticket_id" value=" {{ticket_id}}" readonly>
                     </div>
+                    <div class="col-4"></div>
+                    <div class="amount col-2">
+                        <label>TICKET PRICE</label><br>
+                        <input class="form-control" type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}"
+                            readonly>
+                    </div>
+                </div>
+                <div class="creditcard col-4 mx-2"><br>
+                    <label>Credit Card Number<span>*</span></label><br>
+                    <input class="form-control " type="tel" pattern="[0-9]*" name="card_no" id="cardNo"
+                        autocomplete="off" maxlength="19" placeholder="Enter card number" title="Fill card number again"
+                        required><br>
+                    <label>Credit Card Holder's Name<span>*</span></label><br>
+                    <input class="form-control" type="text" name="card_name" id="cardName" placeholder="Enter name"
+                        pattern="[A-Za-z]{1,20}" title="Fill holder's name again" required>
+                </div>
                 <div class="expire-date mx-2">
                     <label>Expiration Date<span>*</span></label><br>
                     <div class="row">
@@ -92,38 +97,42 @@
                             </select>
                         </div>
                         <div class="col-2">
-                    <label>CVV Number<span>*</span></label><br>
-                    <input class="form-control" type="password" name="cvv_no" pattern="[0-9]{3}" title="Invalid CVV Number"placeholder="Enter CVV" required>
-                </div>
-                <div class="button">
-                    <a href="mybooking" class="cancle" id="btnCancle">CANCLE</a>
-                    <button type="submit" value="confirm" class="confirm" id="btnConfirm">
-                        CONFIRM
-                    </button>
-                </div>
-                <div class="hidden">
-                    <input type="hidden" name="ticket_id" value="{{ticket_id}}" readonly>
-                </div>
-            </form>
-        </div><br>
-        <div class="text-center">
-          <p style="font-size: 100%;">**กดปุ่มวิธีการใช้งานเพื่อดูขั้นตอนการจ่ายเงิน**</p>
-          <!-- Button to launch a modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">วิธีการใช้งาน</button>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">         
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
+                            <label>CVV Number<span>*</span></label><br>
+                            <input class="form-control" type="password" name="cvv_no" pattern="[0-9]{3}"
+                                title="Invalid CVV Number" placeholder="Enter CVV" required>
+                        </div>
+                        <div class="button">
+                            <a href="mybooking" class="cancle" id="btnCancle">CANCLE</a>
+                            <button type="submit" value="confirm" class="confirm" id="btnConfirm">
+                                CONFIRM
+                            </button>
+                        </div>
+                        <div class="hidden">
+                            <input type="hidden" name="ticket_id" value="{{ticket_id}}" readonly>
+                        </div>
+        </form>
+    </div></div></div></div><br>
+    <div class="text-center">
+        <p style="font-size: 100%;">**กดปุ่มวิธีการใช้งานเพื่อดูขั้นตอนการจ่ายเงิน**</p>
+        <!-- Button to launch a modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#exampleModal">วิธีการใช้งาน</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <!-- Add image inside the body of modal -->
                 <div class="modal-body text-center">
-                    <img id="image" src="static/img/img03.png" alt="Click on button" style="width:120%;max-width:1000px" />
+                    <img id="image" src="static/img/img03.png" alt="Click on button"
+                        style="width:120%;max-width:1000px" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-          </div>
-        </div>   
+        </div>
+    </div>
 </body>
 {% endblock %}
