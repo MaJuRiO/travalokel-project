@@ -108,6 +108,7 @@
                         {% endif %}
                         {% if ticket.status == 'PENDING' %}
                         <div class="col-auto">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Cancel Ticket</button>
                             <!---------------------------------------------------------MODAL--------------------------------------------------------->
                             <div class="modal" tabindex="-1" id="DeleteModal">
                                 <div class="modal-dialog">
